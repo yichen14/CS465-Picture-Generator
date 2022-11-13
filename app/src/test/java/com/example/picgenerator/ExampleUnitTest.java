@@ -19,6 +19,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testGood() throws IOException {
-        APIUtilizer.postRequest("n0lvFmxEqnBKWOGerXwbpddTzowNetpp", "nHt2WReR1iCt2HpMFfnQl0cjbWVkHMdv");
+        String accessToken = APIUtilizer.getAccessTokenFromAPI("n0lvFmxEqnBKWOGerXwbpddTzowNetpp", "nHt2WReR1iCt2HpMFfnQl0cjbWVkHMdv");
+        APIUtilizer.postPicGenRequest(accessToken, "睡莲", "油画");
     }
 }
