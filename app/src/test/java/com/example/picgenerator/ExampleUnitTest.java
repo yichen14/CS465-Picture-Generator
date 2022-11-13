@@ -22,4 +22,9 @@ public class ExampleUnitTest {
         String accessToken = APIUtilizer.getAccessTokenFromAPI("n0lvFmxEqnBKWOGerXwbpddTzowNetpp", "nHt2WReR1iCt2HpMFfnQl0cjbWVkHMdv");
         APIUtilizer.postPicGenRequest(accessToken, "睡莲", "油画");
     }
+
+    @Test
+    public void testBad() throws IOException {
+        APIUtilizer.checkGenerationStatus("24.2dba9896ebc094847d7206345c6891a6.86400000.1668403240073.91935c2b97ec7bb7257d905d28c009dc-136892", "8050204");
+    }
 }

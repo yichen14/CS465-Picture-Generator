@@ -20,7 +20,7 @@ public class APIUtilizer {
      */
     public static void postPicGenRequest(String accessToken, String text, String style) throws IOException {
         String command = "curl -i -k \"https://wenxin.baidu.com/moduleApi/portal/api/rest/1.0/ernievilg/v1/txt2img?access_token="
-                + accessToken + "\" --data-urlencode \"text=" + text + "\" --data-urlencode \"style=" + style + " \"";
+                + accessToken + "\" --data-urlencode \"text=" + text + "\" --data-urlencode \"style=" + style + "\"";
         Process process = Runtime.getRuntime().exec(command);
         BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String inputLine;
