@@ -30,7 +30,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="480dp"
         android:background="#FFFFFF"
-        android:src="@drawable/back_arrow" />
+        android:src="@drawable/vector_drawable_star" />
 
     <ImageButton
         android:id="@+id/imagebutton8"
@@ -39,7 +39,7 @@
         android:layout_marginLeft="140dp"
         android:layout_marginTop="480dp"
         android:background="#FFFFFF"
-        android:src="@drawable/back_arrow" />
+        android:src="@drawable/vector_drawable_upload" />
 
     <ImageButton
         android:id="@+id/imagebutton9"
@@ -48,7 +48,7 @@
         android:layout_marginLeft="230dp"
         android:layout_marginTop="480dp"
         android:background="#FFFFFF"
-        android:src="@drawable/back_arrow" />
+        android:src="@drawable/vector_drawable_download" />
 
     <ImageButton
         android:id="@+id/imagebutton10"
@@ -57,7 +57,7 @@
         android:layout_marginLeft="320dp"
         android:layout_marginTop="480dp"
         android:background="#FFFFFF"
-        android:src="@drawable/back_arrow" />
+        android:src="@drawable/vector_drawable_share" />
 
     <Button
         android:id="@+id/button"
