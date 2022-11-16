@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="style">
+        <item>Classic</item>
+        <item>Anime</item>
+        <item>Realistic</item>
+        <item>Ukiyo-e</item>
+        <item>Low Poly</item>
+        <item>Futurism</item>
+        <item>Pixel Style</item>
+        <item>Conceptual</item>
+        <item>Cyberpunk</item>
+        <item>Lolita</item>
+        <item>Baroque</item>
+        <item>Surrealism</item>
+        <item>Aquarelle Painting</item>
+        <item>Vaporwave</item>
+        <item>Oil Painting</item>
+        <item>Cartoon</item>
+    </string-array>
+
+</resources>
