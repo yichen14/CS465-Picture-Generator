@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
 //        String tmp = "https://wenxin.baidu.com/younger/file/ERNIE-ViLG/32fdfb47787777ab6aaaed2fe2799da4i4";
 //        new Images.DownloadImageTask(i1).execute(tmp);
 
-        final PostTasks accessToken = new PostTasks(getContext());
+        final PostTasks accessToken = new PostTasks(getActivity());
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,17 +85,17 @@ public class HomeFragment extends Fragment {
                     accessToken.postTask(et_searchBar.getText().toString(), "low poly", new PostTasks.PostTaskResponseListener(){
                         @Override
                         public void onError(String message) {
-                            Toast.makeText(getContext(), "Something Wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "PostTask: Something Wrong", Toast.LENGTH_SHORT).show();
                         }
                         // If task successfully created
                         @Override
                         public void onResponse(String[] response) {
-                            Toast.makeText(getContext(), "token: "+response[0]+" taskId: "+response[1], Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "token: "+response[0]+" taskId: "+response[1], Toast.LENGTH_SHORT).show();
 
                             String token = response[0];
                             String taskId = response[1];
 
-                            Images image = new Images(getContext());
+                            Images image = new Images(getActivity());
                             // Initialize service (thread) to wait on results
                             ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();;
                             // run when task is ready

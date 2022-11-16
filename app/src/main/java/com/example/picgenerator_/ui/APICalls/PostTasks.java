@@ -66,15 +66,17 @@ public class PostTasks {
     // Post task to generate pic
     public void postTask(String keyword, String style, PostTaskResponseListener postTaskResponseListener) throws JSONException {
         // construct request body (text&style)
+        System.out.println(keyword);
+        System.out.println(style);
         JSONObject jsonBodyObj = new JSONObject();
         jsonBodyObj.put("text", keyword);
         jsonBodyObj.put("style", style);
 
-        getToken(new PostTasks.GetTokenResponseListener() {
+        getToken(new GetTokenResponseListener() {
             // If error
             @Override
             public void onError(String message) {
-                Toast.makeText(context, "Something Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "GetToken: Something Wrong", Toast.LENGTH_SHORT).show();
             }
 
             // If token received
