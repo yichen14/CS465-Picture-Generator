@@ -46,14 +46,15 @@ public class HomeFragment extends Fragment {
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
-//        Spinner spinner = (Spinner) binding.spinner;
-//// Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(homeViewModel,
-//                R.array.style, android.R.layout.simple_spinner_item);
-//// Specify the layout to use when the list of choices appears
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//// Apply the adapter to the spinner
-//        spinner.setAdapter(adapter);
+        Spinner spinner = (Spinner) binding.spinner;
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.style, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0);
 
 
 
@@ -64,10 +65,6 @@ public class HomeFragment extends Fragment {
         ListView images_list;
 //    ImageView i1;
 
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
 
         btn_search = (Button) binding.btnGenerate;
         et_searchBar = binding.searchBar;
@@ -82,7 +79,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    accessToken.postTask(et_searchBar.getText().toString(), "low poly", new PostTasks.PostTaskResponseListener(){
+                    String style = homeViewModel.getStyle(spinner.getSelectedItem().toString());
+                    accessToken.postTask(et_searchBar.getText().toString(), style, new PostTasks.PostTaskResponseListener(){
                         @Override
                         public void onError(String message) {
                             Toast.makeText(getActivity(), "PostTask: Something Wrong", Toast.LENGTH_SHORT).show();
