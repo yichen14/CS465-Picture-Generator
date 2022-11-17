@@ -17,17 +17,31 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class Generate extends Activity {
+    Intent detail_page_intent;
+    ImageButton btn_back;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_imagedetails);
-        Intent detail_page_intent = getIntent();
-
-        ImageButton btn_back = findViewById(R.id.btn_back);
+        detail_page_intent = getIntent();
+        btn_back = findViewById(R.id.btn_back);
 
         String keyword = detail_page_intent.getStringExtra("keyword");
         String style = detail_page_intent.getStringExtra("style");
         Toast.makeText(Generate.this, "keyword: "+keyword+" style: "+style, Toast.LENGTH_SHORT).show();
         final PostTasks postTasks = new PostTasks(Generate.this);
+        generate_btn_onclick(keyword, style, postTasks);
+
+        // back button to home screen
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    private void generate_btn_onclick(String keyword, String style, PostTasks postTasks) {
         try {
             postTasks.postTask(keyword, style, new PostTasks.PostTaskResponseListener(){
                 @Override
@@ -63,14 +77,5 @@ public class Generate extends Activity {
                 }
             });
         } catch (JSONException e) {}
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
-
-//    private void generate_btn_onclick(String keyword)
 }
