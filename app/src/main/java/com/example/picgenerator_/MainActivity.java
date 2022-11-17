@@ -56,25 +56,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-
-//        button1 = (ImageButton) findViewById(R.id.imagebutton);
-//        button1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent();
-//                intent.setClass(getApplicationContext(),BackMain.class);
-//                startActivity(intent);}
-//            });
-
-
-
-//        btn_search = findViewById(R.id.nav_host_fragment_activity_main);
-//        et_searchBar = binding1.searchBar;
-//        final PostTasks accessToken = new PostTasks(android.content.Context.getContext());
-
-
-
     }
 
 
