@@ -17,9 +17,15 @@
         android:src="@drawable/back_arrow" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="353dp"
+        android:id="@+id/generated_image"
+        android:layout_width="342dp"
+        android:layout_height="305dp"
+        android:layout_below="@+id/imagebutton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="36dp"
         app:srcCompat="@drawable/ic_launcher_background"
         tools:layout_marginTop="100dp" />
 

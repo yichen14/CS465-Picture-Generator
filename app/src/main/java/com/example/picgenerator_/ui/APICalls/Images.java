@@ -50,8 +50,10 @@ public class Images {
             public void onResponse(JSONObject response) {
                 String waiting = "";
                 JSONArray imgUrlsJson;
+                System.out.println("response: "+ response);
                 try {
                     waiting = response.getJSONObject("data").getString("waiting");
+                    System.out.println("waiting: "+ waiting);
                     for (TaskReadyEvent listener : listeners) {
                         // if task is ready, trigger listeners, and return list of imgUrls
                         if (waiting.equals("0")) {
@@ -80,6 +82,7 @@ public class Images {
             boolean done = false;
             public void run() {
                 try {
+                    System.out.println("im here");
                     checkStatus(token, taskId);
                 } catch (JSONException e) {
                     e.printStackTrace();

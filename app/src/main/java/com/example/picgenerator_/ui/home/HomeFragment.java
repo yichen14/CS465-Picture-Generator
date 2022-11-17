@@ -1,5 +1,6 @@
 package com.example.picgenerator_.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.picgenerator_.Generate;
 import com.example.picgenerator_.MainActivity;
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.databinding.FragmentHomeBinding;
@@ -43,16 +45,11 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        final TextView textView = binding.textHome;
-//        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
+        // initialize spinner content
         Spinner spinner = (Spinner) binding.spinner;
-// Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.style, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
 
@@ -63,57 +60,26 @@ public class HomeFragment extends Fragment {
         Button btn_search;
         EditText et_searchBar;
         ListView images_list;
-//    ImageView i1;
 
 
         btn_search = (Button) binding.btnGenerate;
         et_searchBar = binding.searchBar;
+//        ImageView i1;
 //        images_list = findViewById(R.id.images_list);
 //        i1 = findViewById(R.id.i1);
 //        String tmp = "https://wenxin.baidu.com/younger/file/ERNIE-ViLG/32fdfb47787777ab6aaaed2fe2799da4i4";
 //        new Images.DownloadImageTask(i1).execute(tmp);
 
-        final PostTasks accessToken = new PostTasks(getActivity());
-
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    String style = homeViewModel.getStyle(spinner.getSelectedItem().toString());
-                    accessToken.postTask(et_searchBar.getText().toString(), style, new PostTasks.PostTaskResponseListener(){
-                        @Override
-                        public void onError(String message) {
-                            Toast.makeText(getActivity(), "PostTask: Something Wrong", Toast.LENGTH_SHORT).show();
-                        }
-                        // If task successfully created
-                        @Override
-                        public void onResponse(String[] response) {
-                            Toast.makeText(getActivity(), "token: "+response[0]+" taskId: "+response[1], Toast.LENGTH_SHORT).show();
-
-                            String token = response[0];
-                            String taskId = response[1];
-
-                            Images image = new Images(getActivity());
-                            // Initialize service (thread) to wait on results
-                            ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();;
-                            // run when task is ready
-                            image.addTaskReadyListener((imgs)-> {
-                                System.out.println(imgs);
-//                                ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, imgs);
-//                                images_list.setAdapter(arrayAdapter);
-                                System.out.println("ready!!!!!!!!!!!!!!!!");
-                                service.shutdown();
-                            });
-                            // This will run in background to constantly check on status of task. It will trigger listener if task is ready
-                            image.getImages(service, token, taskId);
-                        }
-                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Intent detail_page = new Intent();
+                detail_page.setClass(getActivity(), Generate.class);
+                detail_page.putExtra("keyword", et_searchBar.getText().toString());
+                detail_page.putExtra("style", homeViewModel.getStyle(spinner.getSelectedItem().toString()));
+                startActivity(detail_page);
             }
         });
-//        }
         return root;
     }
 

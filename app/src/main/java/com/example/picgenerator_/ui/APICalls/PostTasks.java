@@ -70,6 +70,7 @@ public class PostTasks {
         System.out.println(style);
         JSONObject jsonBodyObj = new JSONObject();
         jsonBodyObj.put("text", keyword);
+
         jsonBodyObj.put("style", style);
 
         getToken(new GetTokenResponseListener() {
