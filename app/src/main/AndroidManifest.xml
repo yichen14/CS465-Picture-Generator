@@ -27,8 +27,6 @@
                 android:value="" />
         </activity>
         <activity android:name=".Generate"></activity>
-        <activity android:name=".BackMain">
-        </activity>
     </application>
 
 </manifest>

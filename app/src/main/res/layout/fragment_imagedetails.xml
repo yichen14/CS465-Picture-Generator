@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <ImageButton
-        android:id="@+id/imagebutton"
+        android:id="@+id/btn_back"
         android:layout_width="49dp"
         android:layout_height="47dp"
         android:layout_marginLeft="10dp"
@@ -20,7 +20,7 @@
         android:id="@+id/generated_image"
         android:layout_width="342dp"
         android:layout_height="305dp"
-        android:layout_below="@+id/imagebutton"
+        android:layout_below="@+id/btn_back"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="33dp"

@@ -3,6 +3,8 @@ package com.example.picgenerator_;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ public class Generate extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_imagedetails);
         Intent detail_page_intent = getIntent();
+
+        ImageButton btn_back = findViewById(R.id.btn_back);
 
         String keyword = detail_page_intent.getStringExtra("keyword");
         String style = detail_page_intent.getStringExtra("style");
@@ -60,6 +64,12 @@ public class Generate extends Activity {
             });
         } catch (JSONException e) {}
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 //    private void generate_btn_onclick(String keyword)
