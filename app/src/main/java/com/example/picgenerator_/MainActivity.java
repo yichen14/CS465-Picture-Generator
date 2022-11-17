@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_searchBar;
     private ListView images_list;
     private FragmentHomeBinding binding1;
-
+    private ImageButton button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
 
-
+        button1 = (ImageButton) findViewById(R.id.imagebutton);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                intent.setClass(getApplicationContext(),BackMain.class);
+                startActivity(intent);}
+            });
 
 
 
