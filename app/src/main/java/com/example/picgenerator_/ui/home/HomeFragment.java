@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
     ListView taskListView;
     Button btn_search;
     EditText et_searchBar;
+    String keyword;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class HomeFragment extends Fragment {
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String keyword = et_searchBar.getText().toString();
+                keyword = et_searchBar.getText().toString();
                 String style = spinner.getSelectedItem().toString();
                 Task_model tmp = new Task_model(keyword, style, "Pending", null);
                 listItems.add(tmp);
@@ -134,6 +135,7 @@ public class HomeFragment extends Fragment {
                     Intent detail_page = new Intent();
                     detail_page.setClass(getActivity(), ImagesListPage.class);
                     detail_page.putStringArrayListExtra("img_urls", new ArrayList<String>(task.getImg_urls()));
+                    detail_page.putExtra("keyword", keyword);
                     startActivity(detail_page);
                 } else {
                     Toast.makeText(getActivity(), "Image generating", Toast.LENGTH_SHORT).show();

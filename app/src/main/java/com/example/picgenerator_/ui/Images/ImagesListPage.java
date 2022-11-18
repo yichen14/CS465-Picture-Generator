@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.picgenerator_.R;
@@ -26,6 +27,8 @@ public class ImagesListPage extends Activity {
     adapter_images_list images_adapter;
     ArrayList<String> img_urls;
     ArrayList<Bitmap> downloaded_imgs;
+    TextView image_list_title;
+    String keyword;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +38,15 @@ public class ImagesListPage extends Activity {
 
         btn_back = findViewById(R.id.btn_back);
         imagesListView = findViewById(R.id.images_list_view);
+        image_list_title = findViewById(R.id.image_list_title);
 
         img_urls = detail_page_intent.getStringArrayListExtra("img_urls");
+        keyword = detail_page_intent.getStringExtra("keyword");
+//        System.out.println("length: "+);
+        String title = img_urls.size()+" Images Generated";
+        System.out.println(title);
+        image_list_title.setText(title);
+
         downloaded_imgs = new ArrayList<>();
         images_adapter = new adapter_images_list(downloaded_imgs, ImagesListPage.this);
         imagesListView.setAdapter(images_adapter);
@@ -64,6 +74,7 @@ public class ImagesListPage extends Activity {
                 Intent detail_page = new Intent();
                 detail_page.setClass(ImagesListPage.this, ImageDetail.class);
                 detail_page.putExtra("img_url", img_urls.get(i));
+                detail_page.putExtra("keyword", keyword);
                 startActivity(detail_page);
             }
         });
