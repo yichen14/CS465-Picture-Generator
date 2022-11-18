@@ -24,8 +24,6 @@ public class FavoriteFragment extends Fragment {
         binding = FragmentFavBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textFav;
-        favoriteViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.ui.APICalls.Images;
-
+/**
+ * todo: 实现image上传到gallery和加入favorite
+ */
 public class ImageDetail extends Activity {
     ImageButton btn_back;
     ImageView generated_image;
@@ -29,8 +31,6 @@ public class ImageDetail extends Activity {
         btn_back = findViewById(R.id.btn_back);
         generated_image = findViewById(R.id.generated_image);
         image_title = findViewById(R.id.image_title);
-
-
 
         image_list_intent = getIntent();
         img_url = image_list_intent.getStringExtra("img_url");

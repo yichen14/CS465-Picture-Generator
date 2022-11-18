@@ -67,15 +67,6 @@ public class HomeFragment extends Fragment {
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
 
-
-
-        final String AK = "FG0FG1bGAm04DoxduGmp2endv6Xd4Met";
-        final String SK = "DTvuzzvGpyaWz63FHLCxooEnXLPMwFLA";
-
-
-
-
-
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

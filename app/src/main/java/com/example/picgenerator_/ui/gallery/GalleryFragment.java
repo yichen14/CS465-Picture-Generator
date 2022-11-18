@@ -12,7 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.picgenerator_.databinding.FragmentGalleryBinding;
 
-public class GalleryFragment extends Fragment {
+public class
+GalleryFragment extends Fragment {
 
     private FragmentGalleryBinding binding;
 
@@ -24,8 +25,6 @@ public class GalleryFragment extends Fragment {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
