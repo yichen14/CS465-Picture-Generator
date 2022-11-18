@@ -34,11 +34,6 @@ import java.util.concurrent.ScheduledExecutorService;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private Button btn_search;
-    private EditText et_searchBar;
-    private ListView images_list;
-    private FragmentHomeBinding binding1;
-    private ImageButton button1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
