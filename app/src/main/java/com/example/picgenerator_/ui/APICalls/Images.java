@@ -11,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.picgenerator_.ui.Images.ImagesListPage;
+import com.example.picgenerator_.ui.gallery.GalleryFragment;
+import com.example.picgenerator_.ui.gallery.GalleryViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,6 +124,39 @@ public class Images {
             System.out.println("download completed");
             bitmap=result;
             onDownloadCompleted.onDownloadCompleted(result);
+        }
+    }
+
+    public static class DownloadImageTaskTmp extends AsyncTask<String, Void, Bitmap> {
+        Bitmap bitmap;
+        int i;
+        GalleryFragment.OnDownloadCompletedTmp onDownloadCompletedTmp;
+
+        public DownloadImageTaskTmp(int i, Bitmap bitmap, GalleryFragment.OnDownloadCompletedTmp onDownloadCompletedTmp) {
+            this.bitmap = bitmap;
+            this.i = i;
+            this.onDownloadCompletedTmp = onDownloadCompletedTmp;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            System.out.println("urldisplay: "+urldisplay);
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            System.out.println("download completed");
+            bitmap=result;
+            i = i;
+            onDownloadCompletedTmp.OnDownloadCompletedTmp(result, i);
         }
     }
 }

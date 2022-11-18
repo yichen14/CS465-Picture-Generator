@@ -1,19 +1,24 @@
 package com.example.picgenerator_.ui.gallery;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import android.graphics.Bitmap;
+
 import androidx.lifecycle.ViewModel;
 
 public class GalleryViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    Bitmap url;
+    String keyword;
 
-    public GalleryViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is Gallery fragment");
+    public GalleryViewModel(Bitmap url, String keyword) {
+        this.url = url;
+        this.keyword = keyword;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public Bitmap getImg() {
+        return url;
+    }
+
+    public String getKeyword() {
+        return keyword;
     }
 }
