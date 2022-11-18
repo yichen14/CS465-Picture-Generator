@@ -26,7 +26,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".Generate"></activity>
+        <activity android:name=".ui.Images.ImagesListPage"></activity>
+        <activity android:name=".ui.Images.ImageDetail"></activity>
     </application>
 
 </manifest>

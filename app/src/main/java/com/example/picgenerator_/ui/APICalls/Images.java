@@ -5,14 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.picgenerator_.Generate;
+import com.example.picgenerator_.ui.Images.ImagesListPage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,9 +96,9 @@ public class Images {
 
     public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         Bitmap bitmap;
-        Generate.OnDownloadCompleted onDownloadCompleted;
+        ImagesListPage.OnDownloadCompleted onDownloadCompleted;
 
-        public DownloadImageTask(Bitmap bitmap, Generate.OnDownloadCompleted onDownloadCompleted) {
+        public DownloadImageTask(Bitmap bitmap, ImagesListPage.OnDownloadCompleted onDownloadCompleted) {
             this.bitmap = bitmap;
             this.onDownloadCompleted = onDownloadCompleted;
         }
@@ -121,12 +119,9 @@ public class Images {
         }
 
         protected void onPostExecute(Bitmap result) {
+            System.out.println("download completed");
             bitmap=result;
             onDownloadCompleted.onDownloadCompleted(result);
-        }
-
-        public Bitmap getBitmap() {
-            return bitmap;
         }
     }
 }

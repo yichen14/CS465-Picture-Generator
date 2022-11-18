@@ -24,7 +24,7 @@ public class HomeViewModel extends ViewModel {
         dict.put("Ukiyo-e", "浮世绘");
         dict.put("Low Poly", "low poly");
         dict.put("Futurism", "未来主义");
-        dict.put("Pixel", "像素风格");
+        dict.put("Pixel Style", "像素风格");
         dict.put("Conceptual", "概念艺术");
         dict.put("Cyberpunk", "赛博朋克");
         dict.put("Lolita", "洛丽塔风格");

@@ -1,7 +1,6 @@
 package com.example.picgenerator_.ui.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ public class adapter_task_list extends ArrayAdapter<Task_model> {
     }
 
     public adapter_task_list(ArrayList<Task_model> data, Context context) {
-        super(context, R.layout.task_list_home, data);
+        super(context, R.layout.task_list_adapter, data);
         this.dataSet = data;
         this.mContext=context;
     }
@@ -46,7 +45,7 @@ public class adapter_task_list extends ArrayAdapter<Task_model> {
 
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.task_list_home, parent, false);
+            convertView = inflater.inflate(R.layout.task_list_adapter, parent, false);
             viewHolder.txt_task_name = (TextView) convertView.findViewById(R.id.task_name);
             viewHolder.txt_task_style = (TextView) convertView.findViewById(R.id.task_style);
             viewHolder.txt_task_status = (TextView) convertView.findViewById(R.id.task_status);

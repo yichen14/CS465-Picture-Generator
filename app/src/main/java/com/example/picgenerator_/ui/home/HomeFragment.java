@@ -22,7 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.picgenerator_.Generate;
+import com.example.picgenerator_.ui.Images.ImagesListPage;
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.databinding.FragmentHomeBinding;
 import com.example.picgenerator_.ui.APICalls.Images;
@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment {
                 Task_model task = (Task_model) adapterView.getAdapter().getItem(i);
                 if (Objects.equals(task.getTask_status(), "Ready")) {
                     Intent detail_page = new Intent();
-                    detail_page.setClass(getActivity(), Generate.class);
+                    detail_page.setClass(getActivity(), ImagesListPage.class);
                     detail_page.putStringArrayListExtra("img_urls", new ArrayList<String>(task.getImg_urls()));
                     startActivity(detail_page);
                 } else {
@@ -140,33 +140,11 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-//                {
-//            @Override
-//            public void onClick(View view) {
-//                int position=(Integer) view.getTag();
-////                Object object= images_list.getItem(position);
-////                Task_model dataModel=(Task_model)object;
-//                System.out.println("start new intent");
-//                Intent detail_page = new Intent();
-//                detail_page.setClass(getActivity(), Generate.class);
-//                startActivity(detail_page);
-//            }
-//        });
 
         return root;
     }
 
-//    @Override
-//    public void onTaskClick(int position) {
-////        int position=(Integer) view.getTag();
-////                Object object= images_list.getItem(position);
-//        System.out.println("clicked");
-//        Task_model task = listItems.get(position);
-//
-//        Intent detail_page = new Intent();
-//        detail_page.setClass(getActivity(), Generate.class);
-//        startActivity(detail_page);
-//    }
+
 
     @Override
     public void onDestroyView() {

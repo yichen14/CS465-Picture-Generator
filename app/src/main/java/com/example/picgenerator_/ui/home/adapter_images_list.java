@@ -25,7 +25,7 @@ public class adapter_images_list  extends ArrayAdapter<Bitmap> {
     }
 
     public adapter_images_list(ArrayList<Bitmap> data, Context context) {
-        super(context, R.layout.images_list_detail, data);
+        super(context, R.layout.images_list_adapter, data);
         this.dataSet = data;
         this.mContext=context;
     }
@@ -45,7 +45,7 @@ public class adapter_images_list  extends ArrayAdapter<Bitmap> {
 
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.images_list_detail, parent, false);
+            convertView = inflater.inflate(R.layout.images_list_adapter, parent, false);
             viewHolder.img_image_detail = convertView.findViewById(R.id.image_detail);
 
             result=convertView;
