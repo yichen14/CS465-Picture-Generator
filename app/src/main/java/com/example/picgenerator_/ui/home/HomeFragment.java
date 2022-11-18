@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
 //                AtomicReference<List<String>> img_urls = null;
 
                 try {
-                    postTasks.postTask(keyword, homeViewModel.getStyle(style), new PostTasks.PostTaskResponseListener(){
+                    postTasks.postTask(homeViewModel.getKeyword(keyword), homeViewModel.getStyle(style), new PostTasks.PostTaskResponseListener(){
                         @Override
                         public void onError(String message) {
                             Toast.makeText(getActivity(), "PostTask: Something Wrong", Toast.LENGTH_SHORT).show();
