@@ -9,23 +9,27 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.example.picgenerator_.R;
-import com.example.picgenerator_.ui.home.adapter_images_list;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterImageListGallery extends ArrayAdapter<Bitmap> {
-    private ArrayList<Bitmap> dataSet;
+
+import android.widget.TextView;
+
+
+public class AdapterImageListGallery extends ArrayAdapter<GalleryViewModel> {
+    private ArrayList<GalleryViewModel> dataSet;
     private List<String> imgUrls;
     Context mContext;
+    String kd;
 
     // View lookup cache
     private static class ViewHolder {
-        ImageView img_image_detail;
+        ImageView img_fav;
+        TextView keyword;
     }
 
-    public AdapterImageListGallery(ArrayList<Bitmap> data, Context context) {
-        super(context, R.layout.images_list_adapter, data);
+    public AdapterImageListGallery(ArrayList<GalleryViewModel> data, Context context) {
+        super(context, R.layout.fragment_fav, data);
         this.dataSet = data;
         this.mContext=context;
     }
@@ -35,29 +39,33 @@ public class AdapterImageListGallery extends ArrayAdapter<Bitmap> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Bitmap bitmap = getItem(position);
+        Bitmap bitmap = getItem(position).getImg();
+        String kd = getItem(position).getKeyword();
+        System.out.println("keyword(adapter): "+kd);
         // Check if an existing view is being reused, otherwise inflate the view
         AdapterImageListGallery.ViewHolder viewHolder; // view lookup cache stored in tag
 
         final View result;
 
         if (convertView == null) {
-            viewHolder = new AdapterImageListGallery.ViewHolder();
+            viewHolder = new com.example.picgenerator_.ui.gallery.AdapterImageListGallery.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.images_list_adapter, parent, false);
-            viewHolder.img_image_detail = convertView.findViewById(R.id.image_detail);
-
+            convertView = inflater.inflate(R.layout.fav_img_list_adapter, parent, false);
+            viewHolder.img_fav = convertView.findViewById(R.id.img);
+            viewHolder.keyword = convertView.findViewById(R.id.keyword);
             result=convertView;
 
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (AdapterImageListGallery.ViewHolder) convertView.getTag();
+            viewHolder = (com.example.picgenerator_.ui.gallery.AdapterImageListGallery.ViewHolder) convertView.getTag();
             result=convertView;
         }
 
         lastPosition = position;
 
-        viewHolder.img_image_detail.setImageBitmap(bitmap);
+        viewHolder.img_fav.setImageBitmap(bitmap);
+        viewHolder.keyword.setText(kd);
+
         // Return the completed view to render on screen
         return convertView;
     }
