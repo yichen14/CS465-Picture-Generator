@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
                         // If task successfully created
                         @Override
                         public void onResponse(String[] response) {
-                            Toast.makeText(getActivity(), "token: "+response[0]+" taskId: "+response[1], Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "token: "+response[0]+" taskId: "+response[1], Toast.LENGTH_SHORT).show();
 
                             String token = response[0];
                             String taskId = response[1];

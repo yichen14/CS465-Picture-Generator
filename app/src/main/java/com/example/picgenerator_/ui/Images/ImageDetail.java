@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.ui.APICalls.Images;
@@ -60,6 +61,7 @@ public class ImageDetail extends Activity {
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(ImageDetail.this, "Saved to myFavourite", Toast.LENGTH_SHORT).show();
                 FavoriteFragment.addImg(img_url, keyword);
             }
         });
