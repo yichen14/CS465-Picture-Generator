@@ -1,18 +1,6 @@
 package com.example.picgenerator_;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.example.picgenerator_.databinding.FragmentHomeBinding;
-import com.example.picgenerator_.ui.APICalls.Images;
-import com.example.picgenerator_.ui.APICalls.PostTasks;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,13 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.picgenerator_.databinding.ActivityMainBinding;
-
-import org.json.JSONException;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
-
 
 
 public class MainActivity extends AppCompatActivity {

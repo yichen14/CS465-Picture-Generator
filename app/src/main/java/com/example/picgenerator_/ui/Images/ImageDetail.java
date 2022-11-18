@@ -11,14 +11,17 @@ import android.widget.TextView;
 
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.ui.APICalls.Images;
+import com.example.picgenerator_.ui.favorite.FavoriteFragment;
+
 /**
  * todo: 实现image上传到gallery和加入favorite
  */
 public class ImageDetail extends Activity {
     ImageButton btn_back;
+    ImageButton btn_fav;
+    ImageButton btn_gallery;
     ImageView generated_image;
     TextView image_title;
-
     String img_url;
     String keyword;
     Intent image_list_intent;
@@ -29,6 +32,8 @@ public class ImageDetail extends Activity {
         setContentView(R.layout.image_details);
 
         btn_back = findViewById(R.id.btn_back);
+        btn_fav = findViewById(R.id.btn_fav);
+        btn_gallery = findViewById(R.id.btn_gallery);
         generated_image = findViewById(R.id.generated_image);
         image_title = findViewById(R.id.image_title);
 
@@ -40,7 +45,6 @@ public class ImageDetail extends Activity {
         Images.DownloadImageTask downloadImageTask = new Images.DownloadImageTask(null, new ImagesListPage.OnDownloadCompleted() {
             @Override
             public void onDownloadCompleted(Bitmap bitmap) {
-                System.out.println("ondownloadlistener triggers");
                 generated_image.setImageBitmap(bitmap);
             }
         });
@@ -52,5 +56,19 @@ public class ImageDetail extends Activity {
                 finish();
             }
         });
+
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FavoriteFragment.addImg(img_url, keyword);
+            }
+        });
+
+//        btn_gallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
     }
 }

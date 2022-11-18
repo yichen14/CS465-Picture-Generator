@@ -12,7 +12,8 @@
         android:id="@+id/fav_list"
         android:layout_width="410dp"
         android:layout_height="653dp"
-        android:layout_marginTop="1dp"></ListView>
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp" />
 
 
 </RelativeLayout>

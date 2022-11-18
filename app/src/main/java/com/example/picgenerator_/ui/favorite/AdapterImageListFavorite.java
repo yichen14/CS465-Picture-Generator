@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.ui.gallery.AdapterImageListGallery;
@@ -18,15 +19,18 @@ public class AdapterImageListFavorite extends ArrayAdapter<Bitmap> {
     private ArrayList<Bitmap> dataSet;
     private List<String> imgUrls;
     Context mContext;
+    String kd;
 
     // View lookup cache
     private static class ViewHolder {
-        ImageView img_image_detail;
+        ImageView img_fav;
+        TextView keyword;
     }
 
-    public AdapterImageListFavorite(ArrayList<Bitmap> data, Context context) {
+    public AdapterImageListFavorite(String kd, ArrayList<Bitmap> data, Context context) {
         super(context, R.layout.fragment_fav, data);
         this.dataSet = data;
+        this.kd = kd;
         this.mContext=context;
     }
 
@@ -44,9 +48,9 @@ public class AdapterImageListFavorite extends ArrayAdapter<Bitmap> {
         if (convertView == null) {
             viewHolder = new AdapterImageListFavorite.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.images_list_adapter, parent, false);
-            viewHolder.img_image_detail = convertView.findViewById(R.id.image_detail);
-
+            convertView = inflater.inflate(R.layout.fav_img_list_adapter, parent, false);
+            viewHolder.img_fav = convertView.findViewById(R.id.img);
+            viewHolder.keyword = convertView.findViewById(R.id.keyword);
             result=convertView;
 
             convertView.setTag(viewHolder);
@@ -57,7 +61,9 @@ public class AdapterImageListFavorite extends ArrayAdapter<Bitmap> {
 
         lastPosition = position;
 
-        viewHolder.img_image_detail.setImageBitmap(bitmap);
+        viewHolder.img_fav.setImageBitmap(bitmap);
+        viewHolder.keyword.setText(kd);
+
         // Return the completed view to render on screen
         return convertView;
     }
