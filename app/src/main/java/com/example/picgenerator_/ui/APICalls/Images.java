@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.picgenerator_.Generate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -93,15 +94,21 @@ public class Images {
         service.scheduleAtFixedRate(check, 0, 2, TimeUnit.SECONDS);
     };
 
-    public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
+
+    public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        Bitmap bitmap;
+        Generate.OnDownloadCompleted onDownloadCompleted;
+
+        public DownloadImageTask(Bitmap bitmap, Generate.OnDownloadCompleted onDownloadCompleted) {
+            this.bitmap = bitmap;
+            this.onDownloadCompleted = onDownloadCompleted;
         }
 
         protected Bitmap doInBackground(String... urls) {
+            System.out.println("urls: "+urls);
             String urldisplay = urls[0];
+            System.out.println("urldisplay: "+urldisplay);
             Bitmap mIcon11 = null;
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
@@ -114,7 +121,12 @@ public class Images {
         }
 
         protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
+            bitmap=result;
+            onDownloadCompleted.onDownloadCompleted(result);
+        }
+
+        public Bitmap getBitmap() {
+            return bitmap;
         }
     }
 }
