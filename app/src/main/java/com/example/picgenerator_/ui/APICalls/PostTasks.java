@@ -66,6 +66,7 @@ public class PostTasks {
     // Post task to generate pic
     public void postTask(String keyword, String style, PostTaskResponseListener postTaskResponseListener) throws JSONException {
         // construct request body (text&style)
+        System.out.println("Posted a generation task!");
         System.out.println(keyword);
         System.out.println(style);
         JSONObject jsonBodyObj = new JSONObject();
