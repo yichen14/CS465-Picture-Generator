@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment {
 
                         @Override
                         public void onResponse(String response) throws JSONException {
+                            System.out.println("response: " + response);
                             postTasks.postTask(response, homeViewModel.getStyle(style), new PostTasks.PostTaskResponseListener(){
                                 @Override
                                 public void onError(String message) {
