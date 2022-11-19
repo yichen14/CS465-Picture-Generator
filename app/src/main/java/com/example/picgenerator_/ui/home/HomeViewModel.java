@@ -3,6 +3,9 @@ package com.example.picgenerator_.ui.home;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.example.picgenerator_.ui.APICalls.PostTranslation;
+
+import org.json.JSONException;
 
 import java.util.Hashtable;
 
