@@ -88,7 +88,6 @@ public class ImagesListPage extends Activity {
         });
     }
 
-
     public interface OnDownloadCompleted{
         void onDownloadCompleted(Bitmap bitmap);
     }
