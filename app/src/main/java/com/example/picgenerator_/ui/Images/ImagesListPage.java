@@ -26,9 +26,10 @@ public class ImagesListPage extends Activity {
     ListView imagesListView;
     adapter_images_list images_adapter;
     ArrayList<String> img_urls;
-    ArrayList<Bitmap> downloaded_imgs;
     TextView image_list_title;
     String keyword;
+    String style;
+    int ith_request;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +43,19 @@ public class ImagesListPage extends Activity {
 
         img_urls = detail_page_intent.getStringArrayListExtra("img_urls");
         keyword = detail_page_intent.getStringExtra("keyword");
-//        System.out.println("length: "+);
+        style = detail_page_intent.getStringExtra("style");
+        ith_request = detail_page_intent.getIntExtra("ith_request", 0);
         String title = img_urls.size()+" Images Generated";
-        System.out.println(title);
         image_list_title.setText(title);
 
-        downloaded_imgs = new ArrayList<>();
-        images_adapter = new adapter_images_list(downloaded_imgs, ImagesListPage.this);
+        images_adapter = new adapter_images_list((ArrayList<Bitmap>) ImageBitmap.images.get(ith_request), ImagesListPage.this);
         imagesListView.setAdapter(images_adapter);
         for (int i = 0; i < img_urls.size(); i++) {
             Images.DownloadImageTask downloadImageTask = new Images.DownloadImageTask(null, new OnDownloadCompleted() {
                 @Override
                 public void onDownloadCompleted(Bitmap bitmap) {
                     System.out.println("downloaded");
-                    downloaded_imgs.add(bitmap);
+                    ImageBitmap.images.get(ith_request).add(bitmap);
                     images_adapter.notifyDataSetChanged();
                 }
             });
@@ -66,15 +66,13 @@ public class ImagesListPage extends Activity {
         imagesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Bitmap img = downloaded_imgs.get(i);
-//                ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-//                img.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-//                byte[] byteArray = bStream.toByteArray();
-
                 Intent detail_page = new Intent();
                 detail_page.setClass(ImagesListPage.this, ImageDetail.class);
-                detail_page.putExtra("img_url", img_urls.get(i));
                 detail_page.putExtra("keyword", keyword);
+                detail_page.putExtra("style", style);
+                detail_page.putExtra("ith_request", ith_request);
+                detail_page.putExtra("ith_image", i);
+
                 startActivity(detail_page);
             }
         });

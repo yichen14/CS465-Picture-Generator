@@ -28,8 +28,7 @@ public class FavoriteFragment extends Fragment {
     private FragmentFavBinding binding;
 
     ListView imagesListViewFav;
-    static ArrayList<String> img_urls = new ArrayList<>();
-    ArrayList<Bitmap> downloaded_imgs;
+    static ArrayList<Bitmap> imgs = new ArrayList<>();
     AdapterImageListFavorite images_adapter;
     static String keyword;
 
@@ -41,32 +40,15 @@ public class FavoriteFragment extends Fragment {
 
         imagesListViewFav = binding.favList;
 
-        downloaded_imgs = new ArrayList<>();
-        images_adapter = new AdapterImageListFavorite(keyword, downloaded_imgs, getActivity());
+        images_adapter = new AdapterImageListFavorite(keyword, imgs, getActivity());
         imagesListViewFav.setAdapter(images_adapter);
-
-        for (int i = 0; i < img_urls.size(); i++) {
-            Images.DownloadImageTask downloadImageTask = new Images.DownloadImageTask(null, new ImagesListPage.OnDownloadCompleted() {
-                @Override
-                public void onDownloadCompleted(Bitmap bitmap) {
-                    System.out.println("downloaded");
-                    downloaded_imgs.add(bitmap);
-                    images_adapter.notifyDataSetChanged();
-                }
-            });
-            downloadImageTask.execute(img_urls.get(i));
-        }
 
         return root;
     }
 
-    public static void addImg(String url, String kd) {
-        img_urls.add(url);
+    public static void addImg(Bitmap img, String kd) {
+        imgs.add(img);
         keyword = kd;
-    }
-
-    public interface OnDownloadCompleted{
-        void onDownloadCompleted(Bitmap bitmap);
     }
 
     @Override
@@ -76,55 +58,3 @@ public class FavoriteFragment extends Fragment {
     }
 }
 
-//
-//public class FavoritePage extends Activity {
-//    ListView imagesListView;
-//    AdapterImageListFavorite images_adapter;
-//    ArrayList<String> img_urls;
-//    ArrayList<Bitmap> downloaded_imgs;
-//    String keyword;
-//
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_fav);
-//
-//        imagesListView = findViewById(R.id.fav_list);
-//
-//
-//        downloaded_imgs = new ArrayList<>();
-//        images_adapter = new AdapterImageListFavorite(downloaded_imgs, FavoritePage.this);
-//        imagesListView.setAdapter(images_adapter);
-//        for (int i = 0; i < img_urls.size(); i++) {
-//            Images.DownloadImageTask downloadImageTask = new Images.DownloadImageTask(null, new ImagesListPage.OnDownloadCompleted() {
-//                @Override
-//                public void onDownloadCompleted(Bitmap bitmap) {
-//                    System.out.println("downloaded");
-//                    downloaded_imgs.add(bitmap);
-//                    images_adapter.notifyDataSetChanged();
-//                }
-//            });
-//            downloadImageTask.execute(img_urls.get(i));
-//        }
-//        System.out.println("adapter");
-//
-//        imagesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent detail_page = new Intent();
-//                detail_page.setClass(FavoritePage.this, ImageDetail.class);
-//                detail_page.putExtra("img_url", img_urls.get(i));
-//                detail_page.putExtra("keyword", keyword);
-//                startActivity(detail_page);
-//            }
-//        });
-//    }
-//
-//
-//    public void addToImgUrls(String img_url) {
-//        this.img_urls.add(img_url);
-//    }
-//
-//    public interface OnDownloadCompleted{
-//        void onDownloadCompleted(Bitmap bitmap);
-//    }
-//}

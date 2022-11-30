@@ -40,15 +40,6 @@ public class HomeViewModel extends ViewModel {
         return dict.get(s);
     }
 
-    public String getKeyword(String s) {
-        Hashtable<String, String> dict = new Hashtable<String, String>();
-        dict.put("School on corn field", "玉米地上的学校.");
-        dict.put("Matcha tea, desk, quiet environment, clear sky outside and window", "抹茶味奶茶，古香书桌，安静的环境，落地窗外天清云淡");
-        dict.put("Panda eating bamboo", "熊猫吃竹子");
-        dict.put("Mountain, creek, waterfall", "山，小溪，瀑布");
-        return dict.get(s);
-    }
-
     public LiveData<String> getText() {
         return mText;
     }

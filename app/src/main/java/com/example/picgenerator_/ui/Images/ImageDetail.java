@@ -2,7 +2,6 @@ package com.example.picgenerator_.ui.Images;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,12 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.picgenerator_.R;
-import com.example.picgenerator_.ui.APICalls.Images;
 import com.example.picgenerator_.ui.favorite.FavoriteFragment;
 
-/**
- * todo: 实现image上传到gallery和加入favorite
- */
 public class ImageDetail extends Activity {
     ImageButton btn_back;
     ImageButton btn_fav;
@@ -25,6 +20,9 @@ public class ImageDetail extends Activity {
     TextView image_title;
     String img_url;
     String keyword;
+    String style;
+    int ith_request;
+    int ith_image;
     Intent image_list_intent;
 
 
@@ -39,17 +37,14 @@ public class ImageDetail extends Activity {
         image_title = findViewById(R.id.image_title);
 
         image_list_intent = getIntent();
-        img_url = image_list_intent.getStringExtra("img_url");
         keyword = image_list_intent.getStringExtra("keyword");
-        image_title.setText(keyword);
+        style = image_list_intent.getStringExtra("style");
+        ith_request = image_list_intent.getIntExtra("ith_request", 0);
+        ith_image = image_list_intent.getIntExtra("ith_image", 0);
 
-        Images.DownloadImageTask downloadImageTask = new Images.DownloadImageTask(null, new ImagesListPage.OnDownloadCompleted() {
-            @Override
-            public void onDownloadCompleted(Bitmap bitmap) {
-                generated_image.setImageBitmap(bitmap);
-            }
-        });
-        downloadImageTask.execute(img_url);
+        image_title.setText(keyword);
+        generated_image.setImageBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
+
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +57,7 @@ public class ImageDetail extends Activity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ImageDetail.this, "Saved to myFavourite", Toast.LENGTH_SHORT).show();
-                FavoriteFragment.addImg(img_url, keyword);
+                FavoriteFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword);
             }
         });
 
