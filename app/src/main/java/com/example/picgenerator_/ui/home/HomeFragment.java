@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
     Button btn_search;
     EditText et_searchBar;
     String keyword;
+    String style;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 keyword = et_searchBar.getText().toString();
-                String style = spinner.getSelectedItem().toString();
+                style = spinner.getSelectedItem().toString();
                 Task_model tmp = new Task_model(keyword, style, "Pending", null);
                 listItems.add(tmp);
                 list_adapter.notifyDataSetChanged();
@@ -97,8 +98,6 @@ public class HomeFragment extends Fragment {
                                 // If task successfully created
                                 @Override
                                 public void onResponse(String[] response) {
-                                    Toast.makeText(getActivity(), "token: "+response[0]+" taskId: "+response[1], Toast.LENGTH_SHORT).show();
-
                                     String token = response[0];
                                     String taskId = response[1];
 
@@ -107,22 +106,13 @@ public class HomeFragment extends Fragment {
                                     ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();;
                                     // run when task is ready
                                     image.addTaskReadyListener((imgs)-> {
-                                        System.out.println(imgs);
-//                                ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, imgs);
-//                                images_list.setAdapter(arrayAdapter);
-                                        System.out.println("ready!!!!!!!!!!!!!!!!");
                                         tmp.setTask_status("Ready");
                                         tmp.setImg_urls(imgs);
                                         list_adapter.notifyDataSetChanged();
                                         service.shutdown();
-                                        // after getting image
-//                                ImageView i1;
-//                                i1 = findViewById(R.id.generated_image);
-//                                new Images.DownloadImageTask(i1).execute(imgs.get(0));
                                     });
                                     // This will run in background to constantly check on status of task. It will trigger listener if task is ready
                                     image.getImages(service, token, taskId);
-
                                 }
                             });
                         }
@@ -141,6 +131,8 @@ public class HomeFragment extends Fragment {
                     detail_page.setClass(getActivity(), ImagesListPage.class);
                     detail_page.putStringArrayListExtra("img_urls", new ArrayList<String>(task.getImg_urls()));
                     detail_page.putExtra("keyword", keyword);
+                    detail_page.putExtra("style", style);
+                    detail_page.putExtra("ith_request", i);
                     startActivity(detail_page);
                 } else {
                     Toast.makeText(getActivity(), "Image generating", Toast.LENGTH_SHORT).show();
@@ -158,6 +150,4 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-
 }

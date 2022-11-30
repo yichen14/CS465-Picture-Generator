@@ -2,6 +2,7 @@ package com.example.picgenerator_;
 
 import android.os.Bundle;
 
+import com.example.picgenerator_.ui.Images.ImageBitmap;
 import com.example.picgenerator_.ui.gallery.GalleryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,17 +36,19 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a8830", "School on corn field");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88v9", "School on corn field");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88a2", "School on corn field");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88ex", "School on corn field");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a885q", "School on corn field");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88i4", "School on corn field");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845daex", "Panda eating bamboo");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845dai4", "Panda eating bamboo");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845da30", "Panda eating bamboo");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845da5q", "Panda eating bamboo");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845daa2", "Panda eating bamboo");
-        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845dav9", "Panda eating bamboo");
+        ImageBitmap tmp = new ImageBitmap();
+
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a8830", "School on corn field");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88v9", "School on corn field");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88a2", "School on corn field");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88ex", "School on corn field");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a885q", "School on corn field");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88i4", "School on corn field");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845daex", "Panda eating bamboo");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845dai4", "Panda eating bamboo");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845da30", "Panda eating bamboo");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845da5q", "Panda eating bamboo");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845daa2", "Panda eating bamboo");
+//        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845dav9", "Panda eating bamboo");
     }
 }
