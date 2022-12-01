@@ -21,6 +21,7 @@ import com.example.picgenerator_.ui.favorite.AdapterImageListFavorite;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class
@@ -30,6 +31,7 @@ GalleryFragment extends Fragment {
     EditText search_bar3;
     static ArrayList<String> img_urls = new ArrayList<>();
     ArrayList<GalleryViewModel> downloaded_imgs;
+    ArrayList<GalleryViewModel> showing_imgs;
     AdapterImageListGallery images_adapter;
     static ArrayList<String> keywords = new ArrayList<>();
     private FragmentGalleryBinding binding;
@@ -46,6 +48,7 @@ GalleryFragment extends Fragment {
 
         downloaded_imgs = new ArrayList<>();
         images_adapter = new AdapterImageListGallery(downloaded_imgs, getActivity());
+
         imagesListViewGallery.setAdapter(images_adapter);
         for (int i = 0; i < img_urls.size(); i++) {
             Images.DownloadImageTaskTmp downloadImageTask = new Images.DownloadImageTaskTmp(i, null, new GalleryFragment.OnDownloadCompletedTmp() {
@@ -53,6 +56,7 @@ GalleryFragment extends Fragment {
                 public void OnDownloadCompletedTmp(Bitmap bitmap, int i) {
                     System.out.println("downloaded");
                     downloaded_imgs.add(new GalleryViewModel(bitmap, keywords.get(i)));
+                    showing_imgs = downloaded_imgs;
                     images_adapter.notifyDataSetChanged();
                 }
             });
@@ -63,8 +67,8 @@ GalleryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String txt_search = search_bar3.getText().toString();
-                downloaded_imgs.removeIf(i -> !Objects.equals(i.getKeyword(), txt_search));
-
+                showing_imgs = downloaded_imgs;
+                showing_imgs.removeIf(i -> !i.getKeyword().toLowerCase().contains(txt_search.toLowerCase()));
                 images_adapter.notifyDataSetChanged();
             }
         });
