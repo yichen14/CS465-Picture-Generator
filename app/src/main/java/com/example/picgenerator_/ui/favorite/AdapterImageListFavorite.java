@@ -15,8 +15,8 @@ import com.example.picgenerator_.ui.gallery.AdapterImageListGallery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterImageListFavorite extends ArrayAdapter<Bitmap> {
-    private ArrayList<Bitmap> dataSet;
+public class AdapterImageListFavorite extends ArrayAdapter<FavoriteViewModel> {
+    private ArrayList<FavoriteViewModel> dataSet;
     private List<String> imgUrls;
     Context mContext;
     String kd;
@@ -27,10 +27,9 @@ public class AdapterImageListFavorite extends ArrayAdapter<Bitmap> {
         TextView keyword;
     }
 
-    public AdapterImageListFavorite(String kd, ArrayList<Bitmap> data, Context context) {
+    public AdapterImageListFavorite(ArrayList<FavoriteViewModel> data, Context context) {
         super(context, R.layout.fragment_fav, data);
         this.dataSet = data;
-        this.kd = kd;
         this.mContext=context;
     }
 
@@ -39,7 +38,8 @@ public class AdapterImageListFavorite extends ArrayAdapter<Bitmap> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Bitmap bitmap = getItem(position);
+        Bitmap bitmap = getItem(position).getImg();
+        String kd = getItem(position).getKeyword();
         // Check if an existing view is being reused, otherwise inflate the view
         AdapterImageListFavorite.ViewHolder viewHolder; // view lookup cache stored in tag
 

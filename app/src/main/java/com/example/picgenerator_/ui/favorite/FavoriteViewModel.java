@@ -1,19 +1,25 @@
 package com.example.picgenerator_.ui.favorite;
 
+import android.graphics.Bitmap;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class FavoriteViewModel extends ViewModel {
+    Bitmap img;
+    String keyword;
 
-    private final MutableLiveData<String> mText;
-
-    public FavoriteViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is Favorite fragment");
+    public FavoriteViewModel(Bitmap img, String keyword) {
+        this.img = img;
+        this.keyword = keyword;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public String getKeyword() {
+        return keyword;
     }
 }

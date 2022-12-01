@@ -6,16 +6,16 @@ import androidx.lifecycle.ViewModel;
 
 public class GalleryViewModel extends ViewModel {
 
-    Bitmap url;
+    Bitmap img;
     String keyword;
 
-    public GalleryViewModel(Bitmap url, String keyword) {
-        this.url = url;
+    public GalleryViewModel(Bitmap img, String keyword) {
+        this.img = img;
         this.keyword = keyword;
     }
 
     public Bitmap getImg() {
-        return url;
+        return img;
     }
 
     public String getKeyword() {

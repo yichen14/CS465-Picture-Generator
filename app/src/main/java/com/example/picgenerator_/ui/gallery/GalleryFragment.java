@@ -54,19 +54,6 @@ GalleryFragment extends Fragment {
         images_adapter = new AdapterImageListGallery(downloaded_imgs, getActivity());
 
         imagesListViewGallery.setAdapter(images_adapter);
-//        for (int i = 0; i < img_urls.size(); i++) {
-//            Images.DownloadImageTaskTmp downloadImageTask = new Images.DownloadImageTaskTmp(i, null, new GalleryFragment.OnDownloadCompletedTmp() {
-//                @Override
-//                public void OnDownloadCompletedTmp(Bitmap bitmap, int i) {
-//                    System.out.println("downloaded");
-//                    downloaded_imgs.add(new GalleryViewModel(bitmap, keywords.get(i)));
-//                    showing_imgs = downloaded_imgs;
-//                    images_adapter.notifyDataSetChanged();
-//                }
-//            });
-//            downloadImageTask.execute(img_urls.get(i));
-//        }
-
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +68,6 @@ GalleryFragment extends Fragment {
         return root;
     }
 
-
-
     public static void addImg(Bitmap img, String kd) {
         imgs.add(img);
         keywords.add(kd);
@@ -96,5 +81,3 @@ GalleryFragment extends Fragment {
         binding = null;
     }
 }
-//[https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a8830, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88v9, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88a2, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88ex, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a885q, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88i4]
-//[https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845daex, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845dai4, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845da30, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845da5q, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845daa2, https://wenxin.baidu.com/younger/file/ERNIE-ViLG/91b9a61e772856c26beab9426ac845dav9]

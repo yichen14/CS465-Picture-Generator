@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,9 +19,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.databinding.FragmentFavBinding;
+import com.example.picgenerator_.databinding.FragmentGalleryBinding;
 import com.example.picgenerator_.ui.APICalls.Images;
 import com.example.picgenerator_.ui.Images.ImageDetail;
 import com.example.picgenerator_.ui.Images.ImagesListPage;
+import com.example.picgenerator_.ui.gallery.AdapterImageListGallery;
+import com.example.picgenerator_.ui.gallery.GalleryViewModel;
 
 import java.util.ArrayList;
 
@@ -29,8 +34,9 @@ public class FavoriteFragment extends Fragment {
 
     ListView imagesListViewFav;
     static ArrayList<Bitmap> imgs = new ArrayList<>();
+    static ArrayList<String> keywords = new ArrayList<>();
+    ArrayList<FavoriteViewModel> downloaded_imgs;
     AdapterImageListFavorite images_adapter;
-    static String keyword;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +45,11 @@ public class FavoriteFragment extends Fragment {
         View root = binding.getRoot();
 
         imagesListViewFav = binding.favList;
-
-        images_adapter = new AdapterImageListFavorite(keyword, imgs, getActivity());
+        downloaded_imgs = new ArrayList<>();
+        for (int i = 0; i < imgs.size(); i++) {
+            downloaded_imgs.add(new FavoriteViewModel(imgs.get(i), keywords.get(i)));
+        }
+        images_adapter = new AdapterImageListFavorite(downloaded_imgs, getActivity());
         imagesListViewFav.setAdapter(images_adapter);
 
         return root;
@@ -48,7 +57,7 @@ public class FavoriteFragment extends Fragment {
 
     public static void addImg(Bitmap img, String kd) {
         imgs.add(img);
-        keyword = kd;
+        keywords.add(kd);
     }
 
     @Override
@@ -57,4 +66,3 @@ public class FavoriteFragment extends Fragment {
         binding = null;
     }
 }
-
