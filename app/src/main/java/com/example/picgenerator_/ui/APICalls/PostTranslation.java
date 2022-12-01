@@ -85,7 +85,7 @@ public class PostTranslation {
                 System.out.println(auth);
                 headers.put("Authorization", auth);
 //                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                headers.put("User-Agent", "YourApp/1.2.3");
+                headers.put("User-Agent", "PicGenerator");
                 return headers;
             }
         };
