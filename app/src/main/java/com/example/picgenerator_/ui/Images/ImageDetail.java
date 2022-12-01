@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.ui.favorite.FavoriteFragment;
+import com.example.picgenerator_.ui.gallery.GalleryFragment;
 
 public class ImageDetail extends Activity {
     ImageButton btn_back;
@@ -61,11 +62,12 @@ public class ImageDetail extends Activity {
             }
         });
 
-//        btn_gallery.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
+        btn_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ImageDetail.this, "Uploaded to gallery", Toast.LENGTH_SHORT).show();
+                GalleryFragment.addImg(img_url, keyword);
+            }
+        });
     }
 }
