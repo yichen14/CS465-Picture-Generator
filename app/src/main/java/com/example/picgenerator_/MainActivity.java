@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        ImageBitmap tmp = new ImageBitmap();
+        new ImageBitmap();
 
 //        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a8830", "School on corn field");
 //        GalleryFragment.addImg("https://wenxin.baidu.com/younger/file/ERNIE-ViLG/6a3b99bc21171a8bed413237aa8e2a88v9", "School on corn field");
