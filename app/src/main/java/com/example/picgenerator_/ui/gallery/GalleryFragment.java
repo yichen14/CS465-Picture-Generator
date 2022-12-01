@@ -1,10 +1,13 @@
 package com.example.picgenerator_.ui.gallery;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -16,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.picgenerator_.databinding.FragmentGalleryBinding;
 import com.example.picgenerator_.ui.APICalls.Images;
+import com.example.picgenerator_.ui.Images.ImageDetail;
 import com.example.picgenerator_.ui.Images.ImagesListPage;
 import com.example.picgenerator_.ui.favorite.AdapterImageListFavorite;
 
@@ -31,6 +35,7 @@ GalleryFragment extends Fragment {
     EditText search_bar3;
 //    static ArrayList<String> img_urls = new ArrayList<>();
     static ArrayList<Bitmap> imgs = new ArrayList<>();
+    static ArrayList<Pair<Integer, Integer>> iths = new ArrayList<>();
     ArrayList<GalleryViewModel> downloaded_imgs;
     ArrayList<GalleryViewModel> showing_imgs;
     AdapterImageListGallery images_adapter;
@@ -65,12 +70,46 @@ GalleryFragment extends Fragment {
             }
         });
 
+        imagesListViewGallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent detail_page = new Intent();
+                detail_page.setClass(getActivity(), ImageDetail.class);
+                detail_page.putExtra("keyword", keywords.get(i));
+//                detail_page.putExtra("style", style);
+                detail_page.putExtra("ith_request", iths.get(i).first);
+                detail_page.putExtra("ith_image", iths.get(i).second);
+
+                startActivity(detail_page);
+            }
+        });
+
         return root;
     }
 
-    public static void addImg(Bitmap img, String kd) {
+    public static void addImg(Bitmap img, String kd, int ith_request, int ith_img) {
         imgs.add(img);
         keywords.add(kd);
+        iths.add(new Pair<>(ith_request, ith_img));
+    }
+    public static void removeImg(Bitmap img, String kd, int ith_request, int ith_img) {
+        for (int i = 0; i < imgs.size(); i++) {
+            if (iths.get(i).first == ith_request && iths.get(i).second == ith_img) {
+                imgs.remove(i);
+                keywords.remove(i);
+                iths.remove(i);
+                break;
+            }
+        }
+    }
+
+    public static boolean checkIfExist(int ith_request, int ith_img) {
+        for (Pair<Integer, Integer> i : iths) {
+            if (i.first == ith_request && i.second == ith_img) {
+                return true;
+            }
+        }
+        return false;
     }
     public interface OnDownloadCompletedTmp{
         void OnDownloadCompletedTmp(Bitmap bitmap, int i);

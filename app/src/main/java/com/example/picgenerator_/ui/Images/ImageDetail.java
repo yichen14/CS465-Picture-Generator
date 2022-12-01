@@ -72,16 +72,26 @@ public class ImageDetail extends Activity {
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ImageDetail.this, "Saved to myFavourite", Toast.LENGTH_SHORT).show();
-                FavoriteFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword);
+                if (FavoriteFragment.checkIfExist(ith_request, ith_image)) {
+                    Toast.makeText(ImageDetail.this, "Unsaved to myFavourite", Toast.LENGTH_SHORT).show();
+                    FavoriteFragment.removeImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
+                } else {
+                    Toast.makeText(ImageDetail.this, "Saved to myFavourite", Toast.LENGTH_SHORT).show();
+                    FavoriteFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
+                }
             }
         });
 
         btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ImageDetail.this, "Uploaded to gallery", Toast.LENGTH_SHORT).show();
-                GalleryFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword);
+                if (GalleryFragment.checkIfExist(ith_request, ith_image)) {
+                    Toast.makeText(ImageDetail.this, "Unsaved to myFavourite", Toast.LENGTH_SHORT).show();
+                    GalleryFragment.removeImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
+                } else {
+                    Toast.makeText(ImageDetail.this, "Uploaded to gallery", Toast.LENGTH_SHORT).show();
+                    GalleryFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
+                }
             }
         });
 

@@ -1,30 +1,19 @@
 package com.example.picgenerator_.ui.favorite;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.picgenerator_.R;
 import com.example.picgenerator_.databinding.FragmentFavBinding;
-import com.example.picgenerator_.databinding.FragmentGalleryBinding;
-import com.example.picgenerator_.ui.APICalls.Images;
 import com.example.picgenerator_.ui.Images.ImageDetail;
 import com.example.picgenerator_.ui.Images.ImagesListPage;
-import com.example.picgenerator_.ui.gallery.AdapterImageListGallery;
-import com.example.picgenerator_.ui.gallery.GalleryViewModel;
 
 import java.util.ArrayList;
 
@@ -35,6 +24,7 @@ public class FavoriteFragment extends Fragment {
     ListView imagesListViewFav;
     static ArrayList<Bitmap> imgs = new ArrayList<>();
     static ArrayList<String> keywords = new ArrayList<>();
+    static ArrayList<Pair<Integer, Integer>> iths = new ArrayList<>();
     ArrayList<FavoriteViewModel> downloaded_imgs;
     AdapterImageListFavorite images_adapter;
 
@@ -52,12 +42,47 @@ public class FavoriteFragment extends Fragment {
         images_adapter = new AdapterImageListFavorite(downloaded_imgs, getActivity());
         imagesListViewFav.setAdapter(images_adapter);
 
+        imagesListViewFav.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent detail_page = new Intent();
+                detail_page.setClass(getActivity(), ImageDetail.class);
+                detail_page.putExtra("keyword", keywords.get(i));
+//                detail_page.putExtra("style", style);
+                detail_page.putExtra("ith_request", iths.get(i).first);
+                detail_page.putExtra("ith_image", iths.get(i).second);
+
+                startActivity(detail_page);
+            }
+        });
+
         return root;
     }
 
-    public static void addImg(Bitmap img, String kd) {
+    public static void addImg(Bitmap img, String kd, int ith_request, int ith_img) {
         imgs.add(img);
         keywords.add(kd);
+        iths.add(new Pair<>(ith_request, ith_img));
+    }
+
+    public static void removeImg(Bitmap img, String kd, int ith_request, int ith_img) {
+        for (int i = 0; i < imgs.size(); i++) {
+            if (iths.get(i).first == ith_request && iths.get(i).second == ith_img) {
+                imgs.remove(i);
+                keywords.remove(i);
+                iths.remove(i);
+                break;
+            }
+        }
+    }
+
+    public static boolean checkIfExist(int ith_request, int ith_img) {
+        for (Pair<Integer, Integer> i : iths) {
+            if (i.first == ith_request && i.second == ith_img) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
