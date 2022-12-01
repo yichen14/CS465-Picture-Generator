@@ -29,7 +29,8 @@ GalleryFragment extends Fragment {
     ListView imagesListViewGallery;
     Button btn_search;
     EditText search_bar3;
-    static ArrayList<String> img_urls = new ArrayList<>();
+//    static ArrayList<String> img_urls = new ArrayList<>();
+    static ArrayList<Bitmap> imgs = new ArrayList<>();
     ArrayList<GalleryViewModel> downloaded_imgs;
     ArrayList<GalleryViewModel> showing_imgs;
     AdapterImageListGallery images_adapter;
@@ -47,21 +48,25 @@ GalleryFragment extends Fragment {
         search_bar3 = binding.searchBar3;
 
         downloaded_imgs = new ArrayList<>();
+        for (int i = 0; i < imgs.size(); i++) {
+            downloaded_imgs.add(new GalleryViewModel(imgs.get(i), keywords.get(i)));
+        }
         images_adapter = new AdapterImageListGallery(downloaded_imgs, getActivity());
 
         imagesListViewGallery.setAdapter(images_adapter);
-        for (int i = 0; i < img_urls.size(); i++) {
-            Images.DownloadImageTaskTmp downloadImageTask = new Images.DownloadImageTaskTmp(i, null, new GalleryFragment.OnDownloadCompletedTmp() {
-                @Override
-                public void OnDownloadCompletedTmp(Bitmap bitmap, int i) {
-                    System.out.println("downloaded");
-                    downloaded_imgs.add(new GalleryViewModel(bitmap, keywords.get(i)));
-                    showing_imgs = downloaded_imgs;
-                    images_adapter.notifyDataSetChanged();
-                }
-            });
-            downloadImageTask.execute(img_urls.get(i));
-        }
+//        for (int i = 0; i < img_urls.size(); i++) {
+//            Images.DownloadImageTaskTmp downloadImageTask = new Images.DownloadImageTaskTmp(i, null, new GalleryFragment.OnDownloadCompletedTmp() {
+//                @Override
+//                public void OnDownloadCompletedTmp(Bitmap bitmap, int i) {
+//                    System.out.println("downloaded");
+//                    downloaded_imgs.add(new GalleryViewModel(bitmap, keywords.get(i)));
+//                    showing_imgs = downloaded_imgs;
+//                    images_adapter.notifyDataSetChanged();
+//                }
+//            });
+//            downloadImageTask.execute(img_urls.get(i));
+//        }
+
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +83,8 @@ GalleryFragment extends Fragment {
 
 
 
-    public static void addImg(String url, String kd) {
-        img_urls.add(url);
+    public static void addImg(Bitmap img, String kd) {
+        imgs.add(img);
         keywords.add(kd);
     }
     public interface OnDownloadCompletedTmp{

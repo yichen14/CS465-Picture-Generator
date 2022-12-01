@@ -77,6 +77,14 @@ public class ImageDetail extends Activity {
             }
         });
 
+        btn_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ImageDetail.this, "Uploaded to gallery", Toast.LENGTH_SHORT).show();
+                GalleryFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword);
+            }
+        });
+
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,14 +108,6 @@ public class ImageDetail extends Activity {
                         e.printStackTrace();
                     }
                 }
-            }
-        });
-
-        btn_gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ImageDetail.this, "Uploaded to gallery", Toast.LENGTH_SHORT).show();
-                GalleryFragment.addImg(img_url, keyword);
             }
         });
     }

@@ -78,7 +78,6 @@ public class HomeFragment extends Fragment {
                 Task_model tmp = new Task_model(keyword, style, "Pending", null);
                 listItems.add(tmp);
                 list_adapter.notifyDataSetChanged();
-//                AtomicReference<List<String>> img_urls = null;
 
                 try {
                     postTranslation.postTranslate(keyword, new PostTranslation.PostTranslateResponseListener() {
@@ -89,7 +88,6 @@ public class HomeFragment extends Fragment {
 
                         @Override
                         public void onResponse(String response) throws JSONException {
-                            System.out.println("response: " + response);
                             postTasks.postTask(response, homeViewModel.getStyle(style), new PostTasks.PostTaskResponseListener(){
                                 @Override
                                 public void onError(String message) {
@@ -130,8 +128,8 @@ public class HomeFragment extends Fragment {
                     Intent detail_page = new Intent();
                     detail_page.setClass(getActivity(), ImagesListPage.class);
                     detail_page.putStringArrayListExtra("img_urls", new ArrayList<String>(task.getImg_urls()));
-                    detail_page.putExtra("keyword", keyword);
-                    detail_page.putExtra("style", style);
+                    detail_page.putExtra("keyword", task.getTask_name());
+                    detail_page.putExtra("style", task.getStyle());
                     detail_page.putExtra("ith_request", i);
                     startActivity(detail_page);
                 } else {
