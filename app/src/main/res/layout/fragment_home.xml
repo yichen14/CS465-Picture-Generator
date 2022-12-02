@@ -76,7 +76,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="1.0">
-
         <ListView
             android:id="@+id/task_list_view"
             android:layout_width="match_parent"
