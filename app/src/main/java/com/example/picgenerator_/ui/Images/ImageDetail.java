@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class ImageDetail extends Activity {
     int ith_request;
     int ith_image;
     Intent image_list_intent;
-
+    int flag = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,22 @@ public class ImageDetail extends Activity {
         image_title.setText(keyword);
         generated_image.setImageBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
         final Context ctx = this;
+
+//        ImageButton clickbtn = (ImageButton) findViewById(R.id.btn_fav);
+//        clickbtn.setOnClickListener(new ImageButton.OnClickListener() {
+//            public void onClick(View v) {
+//                switch(flag){
+//                    case 0:
+//                        clickbtn.setActivated(false);
+//                        flag = 1;
+//                        break;
+//                    case 1:
+//                        clickbtn.setActivated(true);
+//                        flag = 0;
+//                        break;
+//                }
+//            }
+//        });
 
 
         btn_back.setOnClickListener(new View.OnClickListener() {
