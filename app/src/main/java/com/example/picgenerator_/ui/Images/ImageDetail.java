@@ -1,9 +1,12 @@
 package com.example.picgenerator_.ui.Images;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -13,13 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.picgenerator_.MainActivity;
 import com.example.picgenerator_.R;
 import com.example.picgenerator_.ui.favorite.FavoriteFragment;
 import com.example.picgenerator_.ui.gallery.GalleryFragment;
 import android.graphics.Bitmap;
 
+import androidx.core.content.FileProvider;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,6 +67,7 @@ public class ImageDetail extends Activity {
 
         image_title.setText(keyword);
         generated_image.setImageBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
+        final Context ctx = this;
 
 
         btn_back.setOnClickListener(new View.OnClickListener() {
@@ -81,25 +89,33 @@ public class ImageDetail extends Activity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ImageDetail.this, "Saved to local", Toast.LENGTH_SHORT).show();
-                ImageBitmap.saveTempBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
-                ContextWrapper cw = new ContextWrapper(getApplicationContext());
-                File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+                Uri uri = ImageBitmap.saveTempBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
+            }
+        });
 
-                System.out.println(directory);
-                File file = new File(directory, "UniqueFileName" + ".jpg");
-                System.out.println(file.exists());
-                if (file.exists()) {
-                    Log.d("path", file.toString());
-                    FileOutputStream fos = null;
-                    try {
-                        fos = new FileOutputStream(file);
-                        ImageBitmap.images.get(ith_request).get(ith_image).compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                        fos.flush();
-                        fos.close();
-                    } catch (java.io.IOException e) {
-                        e.printStackTrace();
-                    }
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                File imagesFolder = new File(getCacheDir(), "images");
+                Uri uri = null;
+                try {
+                    imagesFolder.mkdirs();
+                    File file = new File(imagesFolder, "shared_image.png");
+
+                    FileOutputStream stream = new FileOutputStream(file);
+                    ImageBitmap.images.get(ith_request).get(ith_image).compress(Bitmap.CompressFormat.PNG, 90, stream);
+                    stream.flush();
+                    stream.close();
+                    uri = FileProvider.getUriForFile(ctx, ctx.getApplicationContext().getPackageName() + ".provider", file);
+
+                } catch (IOException e) {
+                    Log.d(TAG, "IOException while trying to write file for sharing: " + e.getMessage());
                 }
+
+
+                Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                startActivity(Intent.createChooser(intent, "Share image using"));
             }
         });
 

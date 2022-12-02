@@ -1,8 +1,11 @@
 package com.example.picgenerator_.ui.Images;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,15 +17,16 @@ import java.util.List;
 public class ImageBitmap {
     static List<List<Bitmap>> images = new ArrayList<List<Bitmap>>(20);
 
-    public static void saveTempBitmap(Bitmap bitmap) {
+    public static Uri saveTempBitmap(Bitmap bitmap) {
         if (isExternalStorageWritable()) {
-            saveImage(bitmap);
+            return saveImage(bitmap);
         }else{
             System.out.println("Save image fail");
+            return null;
         }
     }
 
-    private static void saveImage(Bitmap finalBitmap) {
+    private static Uri saveImage(Bitmap finalBitmap) {
 
         String root = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Pictures";
         File myDir = new File(root);
@@ -38,9 +42,11 @@ public class ImageBitmap {
             finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return Uri.fromFile(file);
     }
 
     /* Checks if external storage is available for read and write */
