@@ -56,6 +56,7 @@ GalleryFragment extends Fragment {
         for (int i = 0; i < imgs.size(); i++) {
             downloaded_imgs.add(new GalleryViewModel(imgs.get(i), keywords.get(i)));
         }
+//        showing_imgs = new ArrayList<>(downloaded_imgs);
         images_adapter = new AdapterImageListGallery(downloaded_imgs, getActivity());
 
         imagesListViewGallery.setAdapter(images_adapter);
@@ -64,9 +65,11 @@ GalleryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String txt_search = search_bar3.getText().toString();
-                showing_imgs = downloaded_imgs;
+                showing_imgs = new ArrayList<>(downloaded_imgs);
                 showing_imgs.removeIf(i -> !i.getKeyword().toLowerCase().contains(txt_search.toLowerCase()));
-                images_adapter.notifyDataSetChanged();
+//                images_adapter.notifyDataSetChanged();
+                AdapterImageListGallery tmp = new AdapterImageListGallery(showing_imgs, getActivity());
+                imagesListViewGallery.setAdapter(tmp);
             }
         });
 

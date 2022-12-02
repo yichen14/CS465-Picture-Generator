@@ -136,6 +136,7 @@ public class HomeFragment extends Fragment {
                     Intent detail_page = new Intent();
                     detail_page.setClass(getActivity(), ImagesListPage.class);
                     detail_page.putStringArrayListExtra("img_urls", new ArrayList<String>(task.getImg_urls()));
+//                    System.out.println()
                     detail_page.putExtra("keyword", task.getTask_name());
                     detail_page.putExtra("style", task.getStyle());
                     detail_page.putExtra("ith_request", i);
