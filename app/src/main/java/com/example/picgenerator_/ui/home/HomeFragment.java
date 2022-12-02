@@ -75,6 +75,14 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 keyword = et_searchBar.getText().toString();
                 style = spinner.getSelectedItem().toString();
+                if (style.equals("Select Style")) {
+                    Toast.makeText(getActivity(), "Please choose your style before generating picture.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (keyword.isEmpty()) {
+                    Toast.makeText(getActivity(), "Please describe your picture.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Task_model tmp = new Task_model(keyword, style, "Pending", null);
                 listItems.add(tmp);
                 list_adapter.notifyDataSetChanged();

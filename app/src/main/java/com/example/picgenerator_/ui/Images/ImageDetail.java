@@ -111,7 +111,7 @@ public class ImageDetail extends Activity {
             @Override
             public void onClick(View view) {
                 if (GalleryFragment.checkIfExist(ith_request, ith_image)) {
-                    Toast.makeText(ImageDetail.this, "Unsaved to myFavourite", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ImageDetail.this, "Unsaved to gallery", Toast.LENGTH_SHORT).show();
                     GalleryFragment.removeImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
                 } else {
                     Toast.makeText(ImageDetail.this, "Uploaded to gallery", Toast.LENGTH_SHORT).show();
