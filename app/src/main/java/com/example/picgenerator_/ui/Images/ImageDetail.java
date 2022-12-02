@@ -10,7 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,6 +42,7 @@ public class ImageDetail extends Activity {
     ImageButton btn_share;
     ImageView generated_image;
     TextView image_title;
+    Animation scaleUp, scaleDown;
     String img_url;
     String keyword;
     String style;
@@ -57,6 +61,10 @@ public class ImageDetail extends Activity {
         btn_download = findViewById(R.id.imagebutton9);
         btn_share = findViewById(R.id.imagebutton10);
 
+        scaleUp = AnimationUtils.loadAnimation(this, R.anim.scale_up);
+        scaleDown = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+
+
         generated_image = findViewById(R.id.generated_image);
         image_title = findViewById(R.id.image_title);
 
@@ -70,26 +78,13 @@ public class ImageDetail extends Activity {
         generated_image.setImageBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
         final Context ctx = this;
 
-//        ImageButton clickbtn = (ImageButton) findViewById(R.id.btn_fav);
-//        clickbtn.setOnClickListener(new ImageButton.OnClickListener() {
-//            public void onClick(View v) {
-//                switch(flag){
-//                    case 0:
-//                        clickbtn.setActivated(false);
-//                        flag = 1;
-//                        break;
-//                    case 1:
-//                        clickbtn.setActivated(true);
-//                        flag = 0;
-//                        break;
-//                }
-//            }
-//        });
-
+        btn_fav.setActivated(FavoriteFragment.checkIfExist(ith_request, ith_image));
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_back.startAnimation(scaleUp);
+                btn_back.startAnimation(scaleDown);
                 finish();
             }
         });
@@ -97,10 +92,14 @@ public class ImageDetail extends Activity {
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_fav.startAnimation(scaleUp);
+                btn_fav.startAnimation(scaleDown);
                 if (FavoriteFragment.checkIfExist(ith_request, ith_image)) {
+                    btn_fav.setActivated(false);
                     Toast.makeText(ImageDetail.this, "Unsaved to myFavourite", Toast.LENGTH_SHORT).show();
                     FavoriteFragment.removeImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
                 } else {
+                    btn_fav.setActivated(true);
                     Toast.makeText(ImageDetail.this, "Saved to myFavourite", Toast.LENGTH_SHORT).show();
                     FavoriteFragment.addImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
                 }
@@ -110,6 +109,8 @@ public class ImageDetail extends Activity {
         btn_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_gallery.startAnimation(scaleUp);
+                btn_gallery.startAnimation(scaleDown);
                 if (GalleryFragment.checkIfExist(ith_request, ith_image)) {
                     Toast.makeText(ImageDetail.this, "Unsaved to gallery", Toast.LENGTH_SHORT).show();
                     GalleryFragment.removeImg(ImageBitmap.images.get(ith_request).get(ith_image), keyword, ith_request, ith_image);
@@ -123,6 +124,8 @@ public class ImageDetail extends Activity {
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_download.startAnimation(scaleUp);
+                btn_download.startAnimation(scaleDown);
                 Toast.makeText(ImageDetail.this, "Saved to local", Toast.LENGTH_SHORT).show();
                 Uri uri = ImageBitmap.saveTempBitmap(ImageBitmap.images.get(ith_request).get(ith_image));
             }
@@ -131,6 +134,8 @@ public class ImageDetail extends Activity {
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_share.startAnimation(scaleUp);
+                btn_share.startAnimation(scaleDown);
                 File imagesFolder = new File(getCacheDir(), "images");
                 Uri uri = null;
                 try {
