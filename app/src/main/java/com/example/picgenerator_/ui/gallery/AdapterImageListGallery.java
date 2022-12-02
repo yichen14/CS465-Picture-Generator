@@ -15,7 +15,6 @@ import java.util.List;
 
 import android.widget.TextView;
 
-
 public class AdapterImageListGallery extends ArrayAdapter<GalleryViewModel> {
     private ArrayList<GalleryViewModel> dataSet;
     private List<String> imgUrls;
@@ -41,14 +40,13 @@ public class AdapterImageListGallery extends ArrayAdapter<GalleryViewModel> {
         // Get the data item for this position
         Bitmap bitmap = getItem(position).getImg();
         String kd = getItem(position).getKeyword();
-        System.out.println("keyword(adapter): "+kd);
         // Check if an existing view is being reused, otherwise inflate the view
         AdapterImageListGallery.ViewHolder viewHolder; // view lookup cache stored in tag
 
         final View result;
 
         if (convertView == null) {
-            viewHolder = new com.example.picgenerator_.ui.gallery.AdapterImageListGallery.ViewHolder();
+            viewHolder = new AdapterImageListGallery.ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.fav_img_list_adapter, parent, false);
             viewHolder.img_fav = convertView.findViewById(R.id.img);
@@ -57,7 +55,7 @@ public class AdapterImageListGallery extends ArrayAdapter<GalleryViewModel> {
 
             convertView.setTag(viewHolder);
         } else {
-            viewHolder = (com.example.picgenerator_.ui.gallery.AdapterImageListGallery.ViewHolder) convertView.getTag();
+            viewHolder = (AdapterImageListGallery.ViewHolder) convertView.getTag();
             result=convertView;
         }
 
